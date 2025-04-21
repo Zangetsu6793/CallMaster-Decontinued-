@@ -1,0 +1,748 @@
+﻿@model CallMaster.Models.ManagerDashboardModel
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<link href="~/css/ManagerDahsboard.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- Enhanced Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="expand-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#campaigns" class="nav-link active" data-bs-toggle="tab">
+                        <i class="fas fa-bullhorn"></i>
+                        <span class="link-text">Campaigns</span>
+                        <span class="badge bg-success ms-auto">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#agentManagement" class="nav-link" data-bs-toggle="tab">
+                        <i class="fas fa-users-cog"></i>
+                        <span class="link-text">Agent Management</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Welcome, <span class="text-primary">@Model.ManagerName</span></h2>
+                <div class="system-status">
+                    <span class="badge bg-success">
+                        <i class="fas fa-signal"></i> Live Monitoring Active
+                    </span>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <!-- Campaigns Tab -->
+                <div class="tab-pane fade show active" id="campaigns">
+                    <!-- Campaign Performance -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Campaign Performance</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <!-- Campaign performance table content -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campaign Management Section -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Campaign Management</h5>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-plus"></i> New Campaign
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#normalCampaignModal">Normal Campaign</a></li>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#powerDialerModal">Power Dialer</a></li>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#surveyModal">Survey/Feedback</a></li>
+                                    </ul>
+                                </div>
+                                <button class="btn btn-light ms-2">
+                                    <i class="fas fa-sync"></i> Refresh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Campaign list table -->
+                        </div>
+                    </div>
+
+                    <!-- Normal Campaign Modal -->
+                    <div class="modal fade" id="normalCampaignModal">
+                        <!-- Form fields for normal campaign -->
+                    </div>
+
+                    <!-- Power Dialer Modal -->
+                    <div class="modal fade" id="powerDialerModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create Power Dialer Campaign</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="powerDialerForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label>Campaign Name</label>
+                                                    <input type="text" class="form-control" name="name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Minimum Calls/Hour</label>
+                                                    <input type="number" class="form-control" name="minCalls" min="10" max="100" value="30" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" name="autoDial" checked>
+                                                    <label class="form-check-label">Enable Auto-Dial</label>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Max Attempts per Number</label>
+                                                    <input type="number" class="form-control" name="maxAttempts" min="1" max="5" value="3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* <!-- Survey Campaign Modal -->
+                    <div class="modal fade" id="surveyModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create Survey Campaign</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="surveyForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label>Campaign Name</label>
+                                                    <input type="text" class="form-control" name="name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Survey Link</label>
+                                                    <input type="url" class="form-control" name="surveyLink" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label>Minimum Completion Rate (%)</label>
+                                                    <input type="number" class="form-control" name="completionRate" min="1" max="100" value="70">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Min Survey Duration (seconds)</label>
+                                                    <input type="number" class="form-control" name="minDuration" min="30" value="120">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+
+                    <!-- Callback Campaign Modal -->
+                    <div class="modal fade" id="callbackModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create Callback Campaign</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="callbackForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label>Campaign Name</label>
+                                                    <input type="text" class="form-control" name="name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Days to Look Back</label>
+                                                    <input type="number" class="form-control" name="daysToLookBack"
+                                                           min="1" max="7" value="1" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label>Minimum Callback Rate (%)</label>
+                                                    <input type="number" class="form-control" name="requiredCallbackRate"
+                                                           min="1" max="100" value="80" required>
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" name="prioritizeOlder" checked>
+                                                    <label class="form-check-label">Prioritize Older Callbacks</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <!-- Agent Management Tab -->
+                <div class="tab-pane fade" id="agentManagement">
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Manage Agents</h5>
+                            <div>
+                                <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#createAgentModal">
+                                    <i class="fas fa-user-plus"></i> Add Agent
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Search Form -->
+                            <form method="get" action="@Url.Action("ManagerDashboard")#agentManagement">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="Search agents..."
+                                               name="searchName" value="@Model.SearchName">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Agents Table -->
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Agent</th>
+                                            <th>Team</th>
+                                            <th>Status</th>
+                                            <th>VoIP Number</th>
+                                            <th>Extension</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var agent in Model.ManagedAgents)
+                                        {
+                                            <tr>
+                                                    <td>@agent.FullName</td>
+                                                    <td>@agent.TeamName</td>>
+                                                <td>
+                                                    <span class="badge @(string.IsNullOrEmpty(agent.Status) ? "bg-secondary" : agent.Status == "Active" ? "bg-success" : "bg-danger")">
+                                                        @(string.IsNullOrEmpty(agent.Status) ? "Unknown" : agent.Status)
+                                                    </span>
+                                                </td>
+                                                <td>@(agent.VoIPDetails?.InboundNumber ?? "N/A")</td>
+                                                <td>@(agent.VoIPDetails?.Extension ?? "N/A")</td>
+                                                <td>
+                                                    <span>
+                                                        <form method="post" asp-action="ToggleAgentStatus">
+                                                            <input type="hidden" name="agentId" value="@agent.Id" />
+                                                            <input type="hidden" name="page" value="@Model.CurrentPage" />
+                                                            <input type="hidden" name="searchName" value="@Model.SearchName" />
+
+                                                            @if (agent.Status == "Active")
+                                                            {
+                                                                <button type="submit" name="status" value="Inactive" class="btn btn-warning btn-sm">
+                                                                    Disable
+                                                                </button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button type="submit" name="status" value="Active" class="btn btn-success btn-sm">
+                                                                    Enable
+                                                                </button>
+                                                            }
+                                                        </form>
+                                                        <!-- Add the Edit Button Here -->
+                                                        <button class="btn btn-sm btn-outline-primary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editAgentModal"
+                                                                data-agentid="@agent.Id"
+                                                                data-fullname="@agent.FullName"
+                                                                data-email="@agent.Email"
+                                                                data-inboundnumber="@(agent.VoIPDetails?.InboundNumber)"
+                                                                data-extension="@(agent.VoIPDetails?.Extension)"
+                                                                data-username="@(agent.VoIPDetails?.UserName)"
+                                                                data-password="@(agent.VoIPDetails?.Password)"
+                                                                data-principal="@(agent.VoIPDetails?.Principal)"
+                                                                data-received="@(agent.VoIPDetails?.Received)">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                       
+                                                    </span>
+                                 
+                                                    
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <nav aria-label="Agent pagination">
+                                <ul class="pagination justify-content-end">
+                                    @if (Model.CurrentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="@Url.Action("ManagerDashboard", new { page = 1, searchName = Model.SearchName })#agentManagement">
+                                                First
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="@Url.Action("ManagerDashboard", new { page = Model.CurrentPage - 1, searchName = Model.SearchName })#agentManagement">
+                                                Previous
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @for (var i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                            <a class="page-link"
+                                               href="@Url.Action("ManagerDashboard", new { page = i, searchName = Model.SearchName })#agentManagement">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (Model.CurrentPage < Model.TotalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="@Url.Action("ManagerDashboard", new { page = Model.CurrentPage + 1, searchName = Model.SearchName })#agentManagement">
+                                                Next
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="@Url.Action("ManagerDashboard", new { page = Model.TotalPages, searchName = Model.SearchName })#agentManagement">
+                                                Last
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Create Agent Modal -->
+    <div class="modal fade" id="createAgentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Agent</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="@Url.Action("CreateAgent", "Caller")">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" name="firstName" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" name="surname" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="Apassword" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" name="phoneNumber" required />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">License Key</label>
+                                <select class="form-select" name="licenseKey" required>
+                                    @foreach (var license in Model.Licenses)
+                                    {
+                                        <option value="@license.Key">@license.Key (Agent - @license.UsuableAcounts uses left)</option>
+                                    }
+                                </select>
+                                @if (!Model.Licenses.Any())
+                                {
+                                    <div class="text-danger mt-2">No available Agent licenses</div>
+                                }
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#voipCreateModal">
+                                        <i class="fas fa-phone"></i> Configure VoIP Details
+                                    </button>
+                                </div>
+                                <div class="card bg-light p-2">
+                                    <small class="text-muted">VoIP Configuration</small>
+                                    <div id="voipCreateSummary"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hidden VoIP Fields -->
+                        <input type="hidden" name="inboundNumber" id="createInbound" />
+                        <input type="hidden" name="extension" id="createExtension" />
+                        <input type="hidden" name="userName" id="createUsername" />
+                        <input type="hidden" name="password" id="createPassword" />
+                        <input type="hidden" name="principal" id="createPrincipal" />
+                        <input type="hidden" name="received" id="createReceived" />
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Create Agent</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // VoIP Create Configuration
+        function saveCreateVoipConfig() {
+            const voipData = {
+                inbound: document.getElementById('createVoipInbound').value,
+                extension: document.getElementById('createVoipExtension').value,
+                username: document.getElementById('createVoipUsername').value,
+                password: document.getElementById('createVoipPassword').value,
+                principal: document.getElementById('createVoipPrincipal').value,
+                received: document.getElementById('createVoipReceived').value
+            };
+
+            document.getElementById('createInbound').value = voipData.inbound;
+            document.getElementById('createExtension').value = voipData.extension;
+            document.getElementById('createUsername').value = voipData.username;
+            document.getElementById('createPassword').value = voipData.password;
+            document.getElementById('createPrincipal').value = voipData.principal;
+            document.getElementById('createReceived').value = voipData.received;
+
+            bootstrap.Modal.getInstance(document.getElementById('voipCreateModal')).hide();
+            updateCreateVoipSummary();
+        }
+
+        function updateCreateVoipSummary() {
+            const summary = document.getElementById('voipCreateSummary');
+            summary.innerHTML = `
+                <div class="text-truncate"><strong>Inbound:</strong> ${document.getElementById('createInbound').value || 'Not set'}</div>
+                <div class="text-truncate"><strong>Extension:</strong> ${document.getElementById('createExtension').value || 'Not set'}</div>
+            `;
+        }
+    </script>
+
+   <!-- Edit Agent Modal -->
+<div class="modal fade" id="editAgentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Agent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("UpdateAgent", "Caller")">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="agentId" id="editAgentId" />
+                    
+                    <!-- Basic Info -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="fullName" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" required />
+                            </div>
+                        </div>
+                        
+                        <!-- VoIP Section -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#voipEditModal">
+                                    <i class="fas fa-phone"></i> Configure VoIP Details
+                                </button>
+                            </div>
+                            <div class="card bg-light p-2">
+                                <small class="text-muted">VoIP Configuration</small>
+                                <div id="voipSummary"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hidden VoIP Fields -->
+                    <input type="hidden" name="inboundNumber" id="editInboundNumber" />
+                    <input type="hidden" name="extension" id="editExtension" />
+                    <input type="hidden" name="userName" id="editUserName" />
+                    <input type="hidden" name="password" id="editPassword" />
+                    <input type="hidden" name="principal" id="editPrincipal" />
+                    <input type="hidden" name="received" id="editReceived" />
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- VoIP Create Modal -->
+    <div class="modal fade" id="voipCreateModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Configure VoIP Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="voipCreateForm">
+                        <div class="mb-3">
+                            <label class="form-label">Inbound Number</label>
+                            <input type="text" class="form-control" id="voipInbound" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Extension</label>
+                            <input type="text" class="form-control" id="voipExtension" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" id="voipUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="voipPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Principal</label>
+                            <input type="text" class="form-control" id="voipPrincipal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Received</label>
+                            <input type="text" class="form-control" id="voipReceived" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCreateVoipConfig()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- VoIP Edit Modal -->
+<div class="modal fade" id="voipEditModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">VoIP Configuration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="voipEditForm">
+                    <div class="mb-3">
+                        <label class="form-label">Inbound Number</label>
+                        <input type="text" class="form-control" id="voipInbound" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Extension</label>
+                        <input type="text" class="form-control" id="voipExtension" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" id="voipUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="voipPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Principal</label>
+                        <input type="text" class="form-control" id="voipPrincipal" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Received</label>
+                        <input type="text" class="form-control" id="voipReceived" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveVoipConfig()">Apply Configuration</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if the URL contains the #agentManagement hash
+            if (window.location.hash === '#agentManagement') {
+                // Activate the Agent Management tab
+                const agentTab = document.querySelector('a[href="#agentManagement"]');
+                if (agentTab) {
+                    new bootstrap.Tab(agentTab).show();
+                }
+            }
+        });
+
+             // Populate Edit Modal
+        document.querySelectorAll('[data-bs-target="#editAgentModal"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const agent = {
+                    id: this.dataset.agentid,
+                    fullName: this.dataset.fullname,
+                    email: this.dataset.email,
+                    voip: {
+                        inbound: this.dataset.inboundnumber,
+                        extension: this.dataset.extension,
+                        username: this.dataset.username,
+                        password: this.dataset.password,
+                        principal: this.dataset.principal,
+                        received: this.dataset.received
+                    }
+                };
+
+                // Populate main form
+                document.getElementById('editAgentId').value = agent.id;
+                document.querySelector('#editAgentModal [name="fullName"]').value = agent.fullName;
+                document.querySelector('#editAgentModal [name="email"]').value = agent.email;
+
+                // Populate VoIP hidden fields
+                document.getElementById('editInboundNumber').value = agent.voip.inbound;
+                document.getElementById('editExtension').value = agent.voip.extension;
+                document.getElementById('editUserName').value = agent.voip.username;
+                document.getElementById('editPassword').value = agent.voip.password;
+                document.getElementById('editPrincipal').value = agent.voip.principal;
+                document.getElementById('editReceived').value = agent.voip.received;
+
+                // Update VoIP summary
+                updateVoipSummary();
+            });
+        });
+
+        // Save VoIP Configuration
+        function saveVoipConfig() {
+            const voipData = {
+                inbound: document.getElementById('voipInbound').value,
+                extension: document.getElementById('voipExtension').value,
+                username: document.getElementById('voipUsername').value,
+                password: document.getElementById('voipPassword').value,
+                principal: document.getElementById('voipPrincipal').value,
+                received: document.getElementById('voipReceived').value
+            };
+
+            // Update hidden fields
+            document.getElementById('editInboundNumber').value = voipData.inbound;
+            document.getElementById('editExtension').value = voipData.extension;
+            document.getElementById('editUserName').value = voipData.username;
+            document.getElementById('editPassword').value = voipData.password;
+            document.getElementById('editPrincipal').value = voipData.principal;
+            document.getElementById('editReceived').value = voipData.received;
+
+            // Close modal and update summary
+            bootstrap.Modal.getInstance(document.getElementById('voipEditModal')).hide();
+            updateVoipSummary();
+        }
+
+        // Update VoIP Summary Display
+        function updateVoipSummary() {
+            const summary = document.getElementById('voipSummary');
+            summary.innerHTML = `
+                <div class="text-truncate"><strong>Inbound:</strong> ${document.getElementById('editInboundNumber').value || 'Not set'}</div>
+                <div class="text-truncate"><strong>Extension:</strong> ${document.getElementById('editExtension').value || 'Not set'}</div>
+            `;
+        }
+
+
+                // Save VoIP Configuration for Create Agent Modal
+        function saveCreateVoipConfig() {
+            const voipData = {
+                inbound: document.getElementById('voipInbound').value,
+                extension: document.getElementById('voipExtension').value,
+                username: document.getElementById('voipUsername').value,
+                password: document.getElementById('voipPassword').value,
+                principal: document.getElementById('voipPrincipal').value,
+                received: document.getElementById('voipReceived').value
+            };
+
+            // Update hidden fields in the Create Agent form
+            document.getElementById('createInbound').value = voipData.inbound;
+            document.getElementById('createExtension').value = voipData.extension;
+            document.getElementById('createUsername').value = voipData.username;
+            document.getElementById('createPassword').value = voipData.password;
+            document.getElementById('createPrincipal').value = voipData.principal;
+            document.getElementById('createReceived').value = voipData.received;
+
+            // Close the Create VoIP modal
+            bootstrap.Modal.getInstance(document.getElementById('voipCreateModal')).hide();
+
+            // Update the VoIP summary in the Create Agent modal
+            updateCreateVoipSummary();
+        }
+
+        // Update VoIP Summary for Create Agent Modal
+        function updateCreateVoipSummary() {
+            const summary = document.getElementById('voipCreateSummary');
+            summary.innerHTML = `
+                <div class="text-truncate"><strong>Inbound:</strong> ${document.getElementById('createInbound').value || 'Not set'}</div>
+                <div class="text-truncate"><strong>Extension:</strong> ${document.getElementById('createExtension').value || 'Not set'}</div>
+            `;
+        }
+
+    </script>
+</div>

@@ -1,0 +1,330 @@
+﻿<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <!-- Enhanced Sidebar -->
+        <div class="col-auto px-0">
+            <div id="sidebar" class="sidebar collapse-horizontal expandable">
+                <div class="sidebar-header position-relative">
+                    <button class="expand-btn btn btn-link">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="badge bg-danger notification-badge">3</span>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="#campaigns" class="nav-link active" data-bs-toggle="tab">
+                            <i class="fas fa-chart-line"></i>
+                            <span class="link-text">Campaign</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#calllogs" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-history"></i>
+                            <span class="link-text">Calls</span>
+                            <span class="badge bg-info float-end">15</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#dialer" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="link-text">Dialer</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#scripts" class="nav-link" data-bs-toggle="tab">
+                            <i class="fas fa-scroll"></i>
+                            <span class="link-text">Scripts</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-0">Welcome, <span class="text-primary">Sarah Johnson</span></h2>
+                    <small class="text-muted">Current Status: <span class="text-success">Available</span></small>
+                </div>
+                <div class="quick-stats">
+                    <span class="badge bg-primary me-2">
+                        <i class="fas fa-clock"></i> 08:24
+                    </span>
+                    <span class="badge bg-success">
+                        <i class="fas fa-percentage"></i> 78% Efficiency
+                    </span>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <!-- Enhanced Campaign Tab -->
+                <div class="tab-pane fade show active" id="campaigns">
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Sales Blitz Campaign</h5>
+                            <div class="campaign-timer">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span id="campaignTimer">02:18:34</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="progress-container">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6 class="text-muted">Personal Progress</h6>
+                                            <small>78/100 Calls Completed</small>
+                                        </div>
+                                        <div class="progress mb-4" style="height: 25px">
+                                            <div class="progress-bar bg-success progress-bar-striped"
+                                                 role="progressbar" style="width: 78%">
+                                                <span class="progress-text">78%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row stats-grid">
+                                            <div class="col-md-4 mb-3">
+                                                <div class="stat-card">
+                                                    <h6 class="text-muted">Connections</h6>
+                                                    <h3 class="text-primary">42</h3>
+                                                    <small class="text-success">+12% vs target</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="stat-card">
+                                                    <h6 class="text-muted">Conversions</h6>
+                                                    <h3 class="text-primary">15</h3>
+                                                    <small class="text-success">35.7% rate</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="stat-card">
+                                                    <h6 class="text-muted">Avg. Handle</h6>
+                                                    <h3 class="text-primary">4:32</h3>
+                                                    <small class="text-danger">-0:45 vs target</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="leaderboard card border-0 shadow">
+                                        <div class="card-header bg-light">
+                                            <h6 class="mb-0">Team Leaderboard</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <span class="badge bg-warning me-2">#1</span>
+                                                        Mike Chen
+                                                    </div>
+                                                    <span class="badge bg-success">92%</span>
+                                                </li>
+                                                <!-- Add more leaderboard items -->
+                                                <li class="list-group-item d-flex justify-content-between align-items-center active">
+                                                    <div>
+                                                        <span class="badge bg-primary me-2">#3</span>
+                                                        You
+                                                    </div>
+                                                    <span class="badge bg-light text-dark">78%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Call Logs Tab -->
+                <div class="tab-pane fade" id="calllogs">
+                    <div class="card shadow">
+                        <div class="card-header bg-white border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Call History</h5>
+                                <div class="d-flex gap-2">
+                                    <input type="date" class="form-control form-control-sm">
+                                    <select class="form-select form-select-sm">
+                                        <option>All Statuses</option>
+                                        <option>Completed</option>
+                                        <option>Missed</option>
+                                        <option>Voicemail</option>
+                                    </select>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Contact</th>
+                                            <th>Duration</th>
+                                            <th>Status</th>
+                                            <th>Notes</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>10:24 AM</td>
+                                            <td>John Smith<br><small>+1 234 567 890</small></td>
+                                            <td>4:32</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td>Interested in pricing</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-redo"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-info ms-1">
+                                                    <i class="fas fa-comment"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <!-- More call log entries -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Dialer Tab -->
+                <div class="tab-pane fade" id="dialer">
+                    <div class="card shadow">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="mb-0">Dialing Interface</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="dialer-interface">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="caller-id-card mb-4">
+                                            <h6 class="text-muted">Caller ID</h6>
+                                            <h4 class="text-primary">+1 234 567 890</h4>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input type="text"
+                                                   class="form-control form-control-lg text-center"
+                                                   placeholder="Enter number"
+                                                   id="dialInput">
+                                            <button class="btn btn-danger btn-lg">
+                                                <i class="fas fa-phone-slash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="dialpad">
+                                            <div class="row g-2">
+                                                <div class="col-4">
+                                                    <button class="btn btn-outline-secondary btn-lg w-100">1</button>
+                                                </div>
+                                                <!-- Add full dialpad buttons -->
+                                                <div class="col-4">
+                                                    <button class="btn btn-outline-secondary btn-lg w-100">2</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class="btn btn-outline-secondary btn-lg w-100">3</button>
+                                                </div>
+                                                <!-- Continue with remaining numbers -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="call-controls">
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <button class="btn btn-primary w-100 py-3">
+                                                        <i class="fas fa-headset me-2"></i>Hold
+                                                    </button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-success w-100 py-3">
+                                                        <i class="fas fa-check me-2"></i>Transfer
+                                                    </button>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="note-taking">
+                                                        <textarea class="form-control"
+                                                                  rows="4"
+                                                                  placeholder="Call notes..."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Scripts Tab -->
+                <div class="tab-pane fade" id="scripts">
+                    <div class="card shadow">
+                        <div class="card-header bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Script Library</h5>
+                                <div class="search-box">
+                                    <input type="text" class="form-control" placeholder="Search scripts...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="script-categories card">
+                                        <div class="card-body">
+                                            <h6 class="text-muted mb-3">Categories</h6>
+                                            <ul class="nav flex-column">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="#">
+                                                        Sales Pitches
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">
+                                                        Objection Handling
+                                                    </a>
+                                                </li>
+                                                <!-- More categories -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="script-viewer">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">New Customer Onboarding</h5>
+                                                <div class="script-content">
+                                                    <h6>Introduction</h6>
+                                                    <p>"Thank you for choosing our service. My name is [Your Name]..."</p>
+                                                    <h6>Key Points</h6>
+                                                    <ul class="key-points">
+                                                        <li>Confirm customer details</li>
+                                                        <li>Explain next steps</li>
+                                                        <li>Schedule follow-up</li>
+                                                    </ul>
+                                                    <div class="script-actions mt-3">
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-bookmark"></i> Save
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- More scripts -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

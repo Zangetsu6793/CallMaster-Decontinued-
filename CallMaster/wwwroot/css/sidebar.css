@@ -1,0 +1,166 @@
+﻿/* sidebar.css */
+:root {
+    --sidebar-expanded: 240px;
+    --sidebar-collapsed: 60px;
+    --primary-color: #4e73df;
+    --secondary-color: #3a3b45;
+    --transition-speed: 0.3s;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-expanded);
+    background: var(--secondary-color);
+    transition: all var(--transition-speed) ease;
+    z-index: 1000;
+    overflow-x: hidden;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+}
+
+    .sidebar.collapsed {
+        width: var(--sidebar-collapsed);
+    }
+
+    .sidebar .nav-link {
+        color: rgba(255,255,255,0.6);
+        padding: 1rem;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+    }
+
+        .sidebar .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            color: white;
+            background: var(--primary-color);
+            box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+        }
+
+        .sidebar .nav-link i {
+            width: 30px;
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed) ease;
+        }
+
+    .sidebar.collapsed .nav-link i {
+        transform: translateX(5px);
+    }
+
+.link-text {
+    opacity: 1;
+    margin-left: 1rem;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.sidebar.collapsed .link-text {
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.sidebar.collapsed .expand-btn {
+    text-align: center;
+}
+
+.main-content {
+    margin-left: var(--sidebar-expanded);
+    transition: margin var(--transition-speed) ease;
+    min-height: 100vh;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: var(--sidebar-collapsed);
+}
+
+/* Hover effects for collapsed state */
+@media (hover: hover) and (pointer: fine) {
+    .sidebar.collapsed:hover {
+        width: var(--sidebar-expanded);
+    }
+
+        .sidebar.collapsed:hover .link-text {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.1s;
+        }
+
+        .sidebar.collapsed:hover .nav-link i {
+            transform: translateX(0);
+        }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-collapsed);
+    }
+
+        .sidebar.expanded-mobile {
+            width: var(--sidebar-expanded);
+        }
+
+    .main-content {
+        margin-left: var(--sidebar-collapsed);
+    }
+}
+
+/* Modern card styling */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.real-time-stats {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-card {
+    transition: transform 0.2s ease;
+}
+
+    .stat-card:hover {
+        transform: translateY(-3px);
+    }
+
+.chart-container {
+    min-height: 300px;
+    background: #fff;
+    border-radius: 8px;
+}

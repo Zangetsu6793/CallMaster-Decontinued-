@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center text-primary">Login</h2>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
+            @if (ViewBag.ShowSecondForm == null || !ViewBag.ShowSecondForm)
+            {
+                <!-- First Form (Login Form) -->
+                <form asp-action="Login" method="post" id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" required />
+                    </div>
+
+                    @if (ViewBag.RequireLicense == true)
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">License Key (for new users)</label>
+                            <input type="text" name="licenseKey" class="form-control" required />
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            }
+
+            @if (ViewBag.ShowSecondForm != null && ViewBag.ShowSecondForm)
+            {
+                <!-- Second Form (Additional Information Form) -->
+                <form asp-action="CompleteRegistration" method="post" id="secondForm">
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" name="FirstName" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Surname</label>
+                        <input type="text" name="Surname" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" name="PhoneNumber" class="form-control" required />
+                    </div>
+
+                    <!-- Hidden email field -->
+                    <input type="hidden" name="email" value="@Model.Email" />
+
+                    <button type="submit" class="btn btn-primary w-100">Complete Registration</button>
+                </form>
+
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Hide login form and show the second form after registration
+        if ('@ViewBag.ShowSecondForm' === 'True') {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('secondForm').style.display = 'block';
+        }
+    </script>
+}
